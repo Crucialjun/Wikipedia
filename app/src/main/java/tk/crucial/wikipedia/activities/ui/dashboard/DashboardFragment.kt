@@ -8,7 +8,7 @@ import android.widget.TextView
 import android.support.v4.app.Fragment
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
-import tk.crucial.wikipedia.activities.R
+import tk.crucial.wikipedia.R
 
 class DashboardFragment : Fragment() {
 
