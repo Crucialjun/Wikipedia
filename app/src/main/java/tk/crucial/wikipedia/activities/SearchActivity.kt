@@ -36,14 +36,13 @@ class SearchActivity : AppCompatActivity() {
         searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
         searchView.setIconifiedByDefault(false)
         searchView.requestFocus()
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextChange(newText: String?): Boolean {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
 
             override fun onQueryTextSubmit(query:String):Boolean{
                 println("updated search")
-                return false
-            }
-
-            override fun OnQueryTextChange(s:String):Boolean{
                 return false
             }
         })
