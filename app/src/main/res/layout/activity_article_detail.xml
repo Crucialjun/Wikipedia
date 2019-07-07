@@ -3,12 +3,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/appbar">
+
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:id="@+id/toolbar"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
     <WebView
         android:id="@+id/article_detail_webview"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
     </WebView>
+    <ProgressBar
+        android:id="@+id/page_progress"
+        android:layout_width="56dp"
+        android:layout_height="56dp">
+
+    </ProgressBar>
 
 
 </FrameLayout>

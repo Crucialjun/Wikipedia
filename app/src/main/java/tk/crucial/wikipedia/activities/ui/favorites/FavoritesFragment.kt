@@ -1,4 +1,4 @@
-package tk.crucial.wikipedia.activities.ui.home
+package tk.crucial.wikipedia.activities.ui.favorites
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,24 +8,22 @@ import android.widget.TextView
 import android.support.v4.app.Fragment
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
-import android.content.Intent
 import tk.crucial.wikipedia.R
-import tk.crucial.wikipedia.activities.ArticleDetailActivity
 
-class HomeFragment : Fragment() {
+class FavoritesFragment : Fragment() {
 
-    private lateinit var homeViewModel: HomeViewModel
+    private lateinit var favoritesViewModel: FavoritesViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        homeViewModel =
-            ViewModelProviders.of(this).get(HomeViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
+        favoritesViewModel =
+            ViewModelProviders.of(this).get(FavoritesViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_favorites, container, false)
         val textView: TextView = root.findViewById(R.id.text_home)
-        homeViewModel.text.observe(this, Observer {
+        favoritesViewModel.text.observe(this, Observer {
             textView.text = it
         })
         return root

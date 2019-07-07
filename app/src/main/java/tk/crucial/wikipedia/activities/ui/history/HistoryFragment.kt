@@ -1,4 +1,4 @@
-package tk.crucial.wikipedia.activities.ui.dashboard
+package tk.crucial.wikipedia.activities.ui.history
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,20 +10,20 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import tk.crucial.wikipedia.R
 
-class DashboardFragment : Fragment() {
+class HistoryFragment : Fragment() {
 
-    private lateinit var dashboardViewModel: DashboardViewModel
+    private lateinit var historyViewModel: HistoryViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        dashboardViewModel =
-            ViewModelProviders.of(this).get(DashboardViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_dashboard, container, false)
+        historyViewModel =
+            ViewModelProviders.of(this).get(HistoryViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_history, container, false)
         val textView: TextView = root.findViewById(R.id.text_dashboard)
-        dashboardViewModel.text.observe(this, Observer {
+        historyViewModel.text.observe(this, Observer {
             textView.text = it
         })
         return root

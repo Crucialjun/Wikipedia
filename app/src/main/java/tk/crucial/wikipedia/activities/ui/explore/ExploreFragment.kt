@@ -1,4 +1,4 @@
-package tk.crucial.wikipedia.activities.ui.notifications
+package tk.crucial.wikipedia.activities.ui.explore
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,20 +10,20 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import tk.crucial.wikipedia.R
 
-class NotificationsFragment : Fragment() {
+class ExploreFragment : Fragment() {
 
-    private lateinit var notificationsViewModel: NotificationsViewModel
+    private lateinit var exploreViewModel: ExploreViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        notificationsViewModel =
-            ViewModelProviders.of(this).get(NotificationsViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_notifications, container, false)
+        exploreViewModel =
+            ViewModelProviders.of(this).get(ExploreViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_explore, container, false)
         val textView: TextView = root.findViewById(R.id.text_notifications)
-        notificationsViewModel.text.observe(this, Observer {
+        exploreViewModel.text.observe(this, Observer {
             textView.text = it
         })
         return root
