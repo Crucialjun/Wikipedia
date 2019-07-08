@@ -1,16 +1,23 @@
 package tk.crucial.wikipedia.activities
 
+import adapters.ArticleListItemRecyclerAdapter
 import android.app.SearchManager
 import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.SearchView
 import kotlinx.android.synthetic.main.activity_article_detail.*
+import kotlinx.android.synthetic.main.activity_search.*
+import providers.ArticleDataProvider
 import tk.crucial.wikipedia.R
 
 class SearchActivity : AppCompatActivity() {
+
+    private val articleProvider:ArticleDataProvider = ArticleDataProvider()
+    private var adapter: ArticleListItemRecyclerAdapter = ArticleListItemRecyclerAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,6 +25,10 @@ class SearchActivity : AppCompatActivity() {
 
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
+        search_results_recycler.layoutManager = LinearLayoutManager(this)
+        search_results_recycler.adapter = adapter
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -42,6 +53,12 @@ class SearchActivity : AppCompatActivity() {
             }
 
             override fun onQueryTextSubmit(query:String):Boolean{
+
+                articleProvider.search(query,0, 20 { wikiResult ->
+                    adapter.currentResults.clear()
+                    adapter.currentResults.addAll(wikiResult.query?.pages)
+                    runOnUiThread { adapter.notifyDataSetChanged() }
+                })
                 println("updated search")
                 return false
             }

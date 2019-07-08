@@ -12,14 +12,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_explore.*
+import providers.ArticleDataProvider
 import tk.crucial.wikipedia.R
 import tk.crucial.wikipedia.activities.SearchActivity
 
 class ExploreFragment : Fragment() {
 
+    private val articleProvider:ArticleDataProvider = ArticleDataProvider()
+
     private lateinit var exploreViewModel: ExploreViewModel
     var searchCardView: CardView? = null
     var exploreRecycler: RecyclerView? = null
+    var adapter: ArticleCardRecyclerAdapter = ArticleCardRecyclerAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,6 +47,16 @@ class ExploreFragment : Fragment() {
         exploreRecycler!!.adapter = ArticleCardRecyclerAdapter()
 
         return view
+    }
+
+    private fun getRandomArticles(){
+        articleProvider.getRandom(15, {wikiResult ->
+            adapter.currentResults.clear()
+            adapter.currentResults.addAll(wikiResult.query!!.pages)
+            activity.runOnUiThread(adapter.notifyDataSetChanged()}
+        }
+
+        })
     }
 
 }
