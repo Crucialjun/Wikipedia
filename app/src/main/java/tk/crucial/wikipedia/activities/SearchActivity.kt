@@ -11,6 +11,7 @@ import android.view.MenuItem
 import android.widget.SearchView
 import kotlinx.android.synthetic.main.activity_article_detail.*
 import kotlinx.android.synthetic.main.activity_search.*
+import models.WikiResult
 import providers.ArticleDataProvider
 import tk.crucial.wikipedia.R
 
@@ -48,17 +49,17 @@ class SearchActivity : AppCompatActivity() {
         searchView.setIconifiedByDefault(false)
         searchView.requestFocus()
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextChange(newText: String?): Boolean {
+            override fun onQueryTextChange(query: String?): Boolean {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
 
             override fun onQueryTextSubmit(query:String):Boolean{
 
-                articleProvider.search(query,0, 20 { wikiResult ->
+                articleProvider.search(query,0,20) { wikiResult ->
                     adapter.currentResults.clear()
-                    adapter.currentResults.addAll(wikiResult.query?.pages)
+                    adapter.currentResults.addAll(wikiResult.query!!.pages)
                     runOnUiThread { adapter.notifyDataSetChanged() }
-                })
+                }
                 println("updated search")
                 return false
             }

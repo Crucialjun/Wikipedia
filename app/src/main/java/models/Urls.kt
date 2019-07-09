@@ -26,10 +26,11 @@ object Urls {
                 "&formatversion=2"+
                 "&generator=random" +
                 "&grnnamespace=0" +
-                "&gpslimit=$take" +
+                "&grnlimit=$take" +
                 "&prop=pageimages|info" +
                 "&pithumbsize=200" +
                 "&pilimit=$take" +
-                "&format=json"
+                "&format=json"+
+                "&inprop=url"
     }
 }
