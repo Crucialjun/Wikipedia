@@ -44,19 +44,19 @@ class ExploreFragment : Fragment() {
 
         exploreRecycler = view.findViewById(R.id.explore_article_recycler)
         exploreRecycler!!.layoutManager = LinearLayoutManager(context)
-        exploreRecycler!!.adapter = ArticleCardRecyclerAdapter()
+        exploreRecycler!!.adapter =  adapter
 
         return view
     }
 
     private fun getRandomArticles(){
-        articleProvider.getRandom(15, {wikiResult ->
+        articleProvider.getRandom(15) { wikiResult ->
             adapter.currentResults.clear()
             adapter.currentResults.addAll(wikiResult.query!!.pages)
-            activity.runOnUiThread(adapter.notifyDataSetChanged()}
+            activity!!.runOnUiThread { adapter.notifyDataSetChanged()}
         }
 
-        })
+    }
     }
 
-}
+
