@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import holders.CardViewHolder
 import models.WikiPage
 import tk.crucial.wikipedia.R
+import java.io.BufferedReader
 
 class ArticleCardRecyclerAdapter : RecyclerView.Adapter<CardViewHolder>() {
     val currentResults: ArrayList<WikiPage> = ArrayList<WikiPage>()
