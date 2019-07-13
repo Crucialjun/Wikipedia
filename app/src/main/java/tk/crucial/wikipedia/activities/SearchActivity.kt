@@ -11,19 +11,21 @@ import android.view.MenuItem
 import android.widget.SearchView
 import kotlinx.android.synthetic.main.activity_article_detail.*
 import kotlinx.android.synthetic.main.activity_search.*
+import managers.WikiManager
 import models.WikiResult
 import providers.ArticleDataProvider
 import tk.crucial.wikipedia.R
+import WikiApplication
 
 class SearchActivity : AppCompatActivity() {
 
-    private val articleProvider:ArticleDataProvider = ArticleDataProvider()
+    private var wikiManager : WikiManager? = null
     private var adapter: ArticleListItemRecyclerAdapter = ArticleListItemRecyclerAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
-
+        wikiManager = (applicationContext as WikiApplication).wikiManager
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
@@ -55,7 +57,7 @@ class SearchActivity : AppCompatActivity() {
 
             override fun onQueryTextSubmit(query:String):Boolean{
 
-                articleProvider.search(query,0,20) { wikiResult ->
+                wikiManager?.search(query,0,20) { wikiResult ->
                     adapter.currentResults.clear()
                     adapter.currentResults.addAll(wikiResult.query!!.pages)
                     runOnUiThread { adapter.notifyDataSetChanged() }

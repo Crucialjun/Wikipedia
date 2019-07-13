@@ -21,16 +21,15 @@ import providers.ArticleDataProvider
 import tk.crucial.wikipedia.R
 import tk.crucial.wikipedia.activities.SearchActivity
 import java.lang.Exception
+import WikiApplication
 
 class ExploreFragment : Fragment() {
-    private var wikiManager : WikiManager? = null
-
-
     private lateinit var exploreViewModel: ExploreViewModel
     var searchCardView: CardView? = null
     var exploreRecycler: RecyclerView? = null
     var adapter: ArticleCardRecyclerAdapter = ArticleCardRecyclerAdapter()
     var refresher : SwipeRefreshLayout? = null
+    private var wikiManager : WikiManager? = null
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
@@ -73,7 +72,7 @@ class ExploreFragment : Fragment() {
         refresher?.isRefreshing = true
 
         try {
-            articleProvider.getRandom(15) { wikiResult ->
+            wikiManager?.getRandom(15) { wikiResult ->
                 adapter.currentResults.clear()
                 adapter.currentResults.addAll(wikiResult.query!!.pages)
                 activity!!.runOnUiThread { adapter.notifyDataSetChanged()

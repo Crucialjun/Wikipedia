@@ -9,15 +9,26 @@ import android.widget.TextView
 import android.support.v4.app.Fragment
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Context
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_history.*
+import managers.WikiManager
 import tk.crucial.wikipedia.R
+import WikiApplication
 
 class HistoryFragment : Fragment() {
 
     private lateinit var historyViewModel: HistoryViewModel
     var historyArticleRecycler: RecyclerView? = null
+    private var wikiManager : WikiManager? = null
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+
+        wikiManager = (activity?.applicationContext as WikiApplication).wikiManager
+    }
+
 
 
     override fun onCreateView(
