@@ -3,6 +3,7 @@ package tk.crucial.wikipedia.activities.ui.explore
 import adapters.ArticleCardRecyclerAdapter
 import android.app.AlertDialog
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -14,20 +15,28 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_explore.*
+import managers.WikiManager
+import org.jetbrains.anko.support.v4.act
 import providers.ArticleDataProvider
 import tk.crucial.wikipedia.R
 import tk.crucial.wikipedia.activities.SearchActivity
 import java.lang.Exception
 
 class ExploreFragment : Fragment() {
+    private var wikiManager : WikiManager? = null
 
-    private val articleProvider:ArticleDataProvider = ArticleDataProvider()
 
     private lateinit var exploreViewModel: ExploreViewModel
     var searchCardView: CardView? = null
     var exploreRecycler: RecyclerView? = null
     var adapter: ArticleCardRecyclerAdapter = ArticleCardRecyclerAdapter()
     var refresher : SwipeRefreshLayout? = null
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+
+        wikiManager = (activity?.applicationContext as WikiApplication).wikiManager
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
